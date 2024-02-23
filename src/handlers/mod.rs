@@ -1,13 +1,11 @@
-use rocket::{serde::json::Json};
+use rocket::serde::json::Json;
 
 use crate::models::*;
 
 // ---- CRUD for Questions ----
 
 #[post("/question", data = "<question>")]
-pub async fn create_question(
-    question: Json<Question>,
-) -> Json<QuestionDetail> {
+pub async fn create_question(question: Json<Question>) -> Json<QuestionDetail> {
     Json(QuestionDetail {
         question_uuid: "question_uuid".to_string(),
         title: "title".to_string(),
@@ -27,18 +25,14 @@ pub async fn read_questions() -> Json<Vec<QuestionDetail>> {
 }
 
 #[delete("/question", data = "<question_uuid>")]
-pub async fn delete_question(
-    question_uuid: Json<QuestionId>
-) {
+pub async fn delete_question(question_uuid: Json<QuestionId>) {
     ()
 }
 
 // ---- CRUD for Answers ----
 
 #[post("/answer", data = "<answer>")]
-pub async fn create_answer(
-    answer: Json<Answer>,
-) -> Json<AnswerDetail> {
+pub async fn create_answer(answer: Json<Answer>) -> Json<AnswerDetail> {
     Json(AnswerDetail {
         answer_uuid: "question_uuid".to_string(),
         question_uuid: "question_uuid".to_string(),
@@ -58,8 +52,6 @@ pub async fn read_answers() -> Json<Vec<AnswerDetail>> {
 }
 
 #[delete("/answer", data = "<answer_uuid>")]
-pub async fn delete_answer(
-    answer_uuid: Json<AnswerId>
-) {
+pub async fn delete_answer(answer_uuid: Json<AnswerId>) {
     ()
 }
